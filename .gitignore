@@ -1,0 +1,14 @@
+# Virtual environment
+venv/
+env/
+
+# Python cache
+__pycache__/
+*.pyc
+
+# System files
+.DS_Store
+
+# Model files (optional)
+*.keras
+*.h5
