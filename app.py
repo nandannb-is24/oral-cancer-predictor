@@ -213,9 +213,15 @@ with col_right:
         st.info("Upload image and fill questionnaire to begin.")
     
     if uploaded_file is not None:
-        image = Image.open(io.BytesIO(uploaded_file.read()))
-        # Fixed Deprecation: use_column_width is replaced by use_container_width
-        st.image(image, caption="Uploaded Image", use_container_width=True) 
+        image_bytes = uploaded_file.getvalue()
+
+        try:
+            image = Image.open(io.BytesIO(image_bytes)).convert("RGB")
+            st.image(image, caption="Uploaded Image", use_column_width=True)
+        except Exception:
+            st.error("Could not open the uploaded image. Please upload a valid JPG or PNG file.")
+            st.stop()
+
         
         if predict_button:
             
